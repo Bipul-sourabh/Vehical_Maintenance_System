@@ -1,16 +1,10 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import config
-
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import psycopg2
 from werkzeug.security import generate_password_hash, check_password_hash
 import config
 import os
 
-app = Flask(__name__)  # Fixed: was _name_, now __name__
+app = Flask(__name__)
 app.secret_key = config.SECRET_KEY
 
 def get_db_connection():
@@ -107,6 +101,6 @@ def initdb():
     conn.close()
     return "Database initialized!"
 
-if __name__ == '__main__':  # Fixed: was _name_ == '_main_', now __name__ == '__main__'
+if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
